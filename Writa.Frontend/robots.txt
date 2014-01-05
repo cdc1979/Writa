@@ -1,0 +1,4 @@
+﻿User-agent: *
+Disallow: /writa/
+Disallow: /App_Data/
+Disallow: /api/

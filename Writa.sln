@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Models", "Writa.Models\Writa.Models.csproj", "{5E9CA810-284C-4B01-8017-D8EF68D7E87B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Frontend", "Writa.Frontend\Writa.Frontend.csproj", "{94CFD1CF-913F-4FD5-9C65-8C4501A79F36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Data.MongoDb", "Writa.MongoDb\Writa.Data.MongoDb.csproj", "{AB77E425-E0CB-4C35-AEEE-FA07AC9E9F12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Plugins.LatestPosts", "Writa.Plugins\Writa.Plugins.LatestPosts.csproj", "{D46C2856-3215-40C9-9198-F1088082B853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Data.EF", "Writa.EF\Writa.Data.EF.csproj", "{2FB4C9DE-B2C1-4C1B-A929-AC11225A6A03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Data.Raven", "Writa.Raven\Writa.Data.Raven.csproj", "{438CE1E8-2350-4F94-8A42-7DD941551DDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E648DBD6-77BD-482D-B5E4-8C30DE2EC444}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Plugins.GoogleAnalytics", "Writa.Plugins.GoogleAnalytics\Writa.Plugins.GoogleAnalytics.csproj", "{96D61677-8115-4936-85F2-936B8FFE538F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Plugins.Navbar", "Writa.Plugins.Navbar\Writa.Plugins.Navbar.csproj", "{C35F785D-B901-4D75-A120-DEFD3A414526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Plugins.Archives", "Writa.Plugins.Archives\Writa.Plugins.Archives.csproj", "{131B2C08-AFF0-461A-B36D-800B9E32276B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8362A14-92FF-4D3C-8E87-72F0EF82CBC1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writa.Plugins.Disqus", "Writa.Plugins.Disqus\Writa.Plugins.Disqus.csproj", "{BFFAB2C0-4A22-46B7-B58D-D72A42349A7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E9CA810-284C-4B01-8017-D8EF68D7E87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9CA810-284C-4B01-8017-D8EF68D7E87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9CA810-284C-4B01-8017-D8EF68D7E87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9CA810-284C-4B01-8017-D8EF68D7E87B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94CFD1CF-913F-4FD5-9C65-8C4501A79F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94CFD1CF-913F-4FD5-9C65-8C4501A79F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94CFD1CF-913F-4FD5-9C65-8C4501A79F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94CFD1CF-913F-4FD5-9C65-8C4501A79F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB77E425-E0CB-4C35-AEEE-FA07AC9E9F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB77E425-E0CB-4C35-AEEE-FA07AC9E9F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB77E425-E0CB-4C35-AEEE-FA07AC9E9F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB77E425-E0CB-4C35-AEEE-FA07AC9E9F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46C2856-3215-40C9-9198-F1088082B853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46C2856-3215-40C9-9198-F1088082B853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46C2856-3215-40C9-9198-F1088082B853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46C2856-3215-40C9-9198-F1088082B853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB4C9DE-B2C1-4C1B-A929-AC11225A6A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB4C9DE-B2C1-4C1B-A929-AC11225A6A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB4C9DE-B2C1-4C1B-A929-AC11225A6A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB4C9DE-B2C1-4C1B-A929-AC11225A6A03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{438CE1E8-2350-4F94-8A42-7DD941551DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{438CE1E8-2350-4F94-8A42-7DD941551DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{438CE1E8-2350-4F94-8A42-7DD941551DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{438CE1E8-2350-4F94-8A42-7DD941551DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D61677-8115-4936-85F2-936B8FFE538F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D61677-8115-4936-85F2-936B8FFE538F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D61677-8115-4936-85F2-936B8FFE538F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D61677-8115-4936-85F2-936B8FFE538F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C35F785D-B901-4D75-A120-DEFD3A414526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C35F785D-B901-4D75-A120-DEFD3A414526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C35F785D-B901-4D75-A120-DEFD3A414526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C35F785D-B901-4D75-A120-DEFD3A414526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131B2C08-AFF0-461A-B36D-800B9E32276B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131B2C08-AFF0-461A-B36D-800B9E32276B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131B2C08-AFF0-461A-B36D-800B9E32276B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131B2C08-AFF0-461A-B36D-800B9E32276B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFFAB2C0-4A22-46B7-B58D-D72A42349A7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFFAB2C0-4A22-46B7-B58D-D72A42349A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFFAB2C0-4A22-46B7-B58D-D72A42349A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFFAB2C0-4A22-46B7-B58D-D72A42349A7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

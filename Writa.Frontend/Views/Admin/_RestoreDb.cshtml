@@ -1,0 +1,47 @@
+﻿@using System.IO
+@{
+    var g = Directory.GetFiles(Server.MapPath("~/App_Data"));
+    List<string> s = new List<string>();
+    foreach (string fn in g) {
+        if (fn.Contains("backup_")) {
+            s.Add(fn);   
+        }
+    }
+    
+    
+}
+<div class="well">
+
+    @if (s.Count() == 0) {
+        
+        <div class="alert alert-info">No backup files found - if you are restoring your data make sure you backup JSON file is copied into the App_Data folder of your blog.</div>
+        
+    }
+    else {
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Date Created</th>
+                <th>Size</th>
+                <th>Restore</th>
+            </tr>
+        </thead>
+        <tbody>
+
+    @foreach (string h in s) {
+        
+            FileInfo f = new FileInfo(h);
+        <tr>
+            <td>@f.Name</td>
+            <td>@f.CreationTime</td>
+            <td>@f.Length bytes</td>
+            <td><button filename="@f.Name" class="restorefile btn btn-success">Restore</button></td>
+        </tr>
+    }
+    }
+            </tbody>
+        </table>
+    }
+</div>

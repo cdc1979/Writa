@@ -1,0 +1,31 @@
+﻿@using Writa.Models;
+@using Writa.Frontend.Models
+@inherits Writa.Frontend.Models.WritaViewPage
+<div class="container" style="padding-top: 50px;">
+    <div class="row">
+        <div class="col-lg-8">
+            
+           @if (thispage != null) {
+           if (thispage.RelatedPosts != null) {
+           foreach (WritaPost p in thispage.RelatedPosts)
+           {
+            <div class="media" style="min-height: 180px;">
+              <a class="pull-left" href="/@p.PostSlug">
+                <img class="media-object img-thumbnail" style="width: 150px;" src="@p.PostThumbnail?width=150&height=150&mode=crop" alt="@p.PostTitle">
+              </a>
+              <div class="media-body">
+                <h2 class="media-heading"><a href="/@p.PostSlug">@p.PostTitle</a> <small>(@StringTools.GetPrettyDate(p.PostCreated))</small></h2>
+                @Html.Raw(p.PostSummary)
+              </div>
+            </div>
+           }
+           }
+            }
+        </div>
+        <div class="col-lg-4">
+            @{Html.RenderPartial("~/Views/Widgets/_LatestPosts.cshtml", datahelper.GetPosts().ToList());}
+            @{Html.RenderPartial("~/Views/Widgets/_Archives.cshtml");}
+            @{Html.RenderPartial("~/Views/Widgets/_TagCloud.cshtml", datahelper.GetPosts().ToList());}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+﻿@using System.IO
+@model string
+          <div class="well">
+              @foreach (string f in Directory.GetFiles(Server.MapPath("~/Images")))
+              {
+                  FileInfo i = new FileInfo(f);
+                  
+                  <div class="pull-left" style="width: 20%; padding: 5px;">
+                      <img class="@Model" filename="@i.Name" src="@Url.Content("~/Images/"+i.Name)?width=200&height=200&mode=crop" />
+                      <div class="pull-right"><i class="fa fa-times"> </i> <small>@i.Length bytes</small></div>
+                  </div>
+              }
+              <div class="clearfix"></div>
+          </div>

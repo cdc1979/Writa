@@ -1,0 +1,36 @@
+﻿@using System.IO
+@{
+    ViewBag.Title = "Media";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+@section PageJavaScript
+{
+    <link href="~/Scripts/dropzone/css/basic.css" rel="stylesheet" />
+    <script src="~/Scripts/dropzone/dropzone.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/writa-admin-media.js"></script>
+}
+<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">Uploaded Images</div>
+      <div class="panel-body">
+          <div id="dz" class="dropzone pull-right"></div>
+        <p>You can browse and delete your uploaded images from this screen, drop new files on the dropzone to the right to 
+            upload new files.
+        </p>
+          <div class="clearfix"></div>
+          <div class="well" id="imagearea">
+              @foreach (string f in Directory.GetFiles(Server.MapPath("~/Images")))
+              {
+                  FileInfo i = new FileInfo(f);
+                  
+                  <div class="pull-left" style="width: 20%; padding: 5px;">
+                      <img style="height: 150px; width: 100%;" src="@Url.Content("~/Images/"+i.Name)?width=200&height=200&mode=crop" />
+                      <div class="pull-right"><i class="fa fa-times"> </i> <small>@i.Length bytes</small></div>
+                  </div>
+              }
+              <div class="clearfix"></div>
+          </div>
+      </div>
+    </div>
+</div>

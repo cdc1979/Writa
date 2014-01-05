@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+@section PageJavaScript
+{
+    <script type="text/javascript"src="@Url.Content("~/Scripts/writa-admin.js")"></script>
+}
+
+<div class="container" style="padding-top: 15em;">
+    <div class="row">
+        <div class="col-lg-1"></div>
+<div class="col-lg-10">   
+    <div class="well" >
+        <p>Congratulations, you have successfully installed Writa. A FREE blogging platform designed from the ground up to be easy to use, simple to deploy and great for developers to extend. As this is the first time you are accessing the control panel, you need to setup a new user, which will be the administrator account for this blog.</p>
+    <form action="/Writa/Register" method="post" id="registerform" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="username" class="col-lg-4 control-label">Your Name</label>
+                    <div class="col-lg-6">
+                        <input type="text" name="username" id="username" class="required form-control" />
+                    </div>
+                </div>                     
+                <div class="form-group">
+                    <label for="email" class="col-lg-4 control-label">Your Email Address</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="email" id="email" class="email required form-control" />
+                    </div>
+                </div>      
+                <div class="form-group">
+                    <label for="password" class="col-lg-4 control-label">Password</label>
+                    <div class="col-lg-6">
+                        <input type="password" name="password" id="password" class="required form-control" />
+                    </div>
+                </div>  
+                 <div class="form-group">
+                    <label for="inputEmail1" class="col-lg-4 control-label">Email me about new features and content <small><a href="~/Home/Privacy">Privacy policy</a></small></label>
+                    <div class="col-lg-2">
+                        <input type="checkbox" checked="checked" name="subscribetonews" id="subscribetonews" class="form-control" />
+                    </div>
+                </div>  
+                    
+                <div class="form-group">
+                    <div class="col-lg-offset-4 col-lg-8">
+                        <input type="submit" value="Create Account" id="RegisterAccountButton" class="btn btn-primary" />
+                        <div>@ViewBag.RegisterError</div>
+                        <div id="registererrorarea"></div>
+                        @Html.AntiForgeryToken()
+                    </div>
+                </div>                                                                                
+        </form>
+    </div>
+    </div>
+        <div class="col-lg-1"></div>
+</div>
+
+</div>

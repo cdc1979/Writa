@@ -1,0 +1,34 @@
+﻿@using Writa.Models
+@using System.Globalization
+@inherits Writa.Frontend.Models.WritaViewPage
+
+    @{
+        WritaPluginSetting p = datahelper.GetPluginSettings("Archives", "Display (true/false)", "true");
+        bool numbr = bool.Parse(p.Value);
+        List<ArchiveItem> a = new List<ArchiveItem>();
+        
+        foreach (var f in datahelper.GetPosts().Where(w => w.PostType == WritaPostType.BLOGPOST))
+        {
+            if ( a.Where( w=>w.yearnum == f.PostCreated.Year && w.monthnum == f.PostCreated.Month).SingleOrDefault() == null) {
+                a.Add(new ArchiveItem() { 
+                    monthnum = f.PostCreated.Month,
+                    yearnum = f.PostCreated.Year
+                });   
+            }
+        }
+    }
+@if (numbr) {
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Archives</div>
+      <!-- List group -->
+      <ul class="list-group">
+    @foreach (var f in a)
+    {
+        <li class="list-group-item"><a href="/archive/@f.yearnum/@f.monthnum">@f.yearnum @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(f.monthnum)</a></li>
+    }
+      </ul>
+    </div>    
+
+}
+
