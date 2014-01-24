@@ -53,13 +53,19 @@ $(document).ready(function () {
         hasServerMetadata: false // don't ask the server for metadata
     });
 
-    var manager = new breeze.EntityManager({ dataService: dataService });
-    var query = new breeze.EntityQuery().from("GetPosts").orderByDesc("PostCreated");
+
 
     var viewmodel = {
         posts: ko.observableArray([]),
-        myobj: ko.observable()
+        myobj: ko.observable(),
+        numbertodisplay: ko.observable(8),
+        availablenums: ko.observableArray(["8", "16", "32"]),
+        orderbyfield: ko.observable("PostCreated")
     }
+
+    var manager = new breeze.EntityManager({ dataService: dataService });
+    var query = new breeze.EntityQuery().from("GetPosts").orderByDesc(viewmodel.orderbyfield()).take(viewmodel.numbertodisplay());
+
     manager.executeQuery(query).then(function (data) {
         var g = data;
         viewmodel.posts(g.results);
@@ -79,9 +85,41 @@ $(document).ready(function () {
             ko.viewmodel.updateFromModel(viewmodel.myobj, data.results[0]);
             editor.importFile('epiceditor', data.results[0].PostContent);
         }).fail(function (e) {
-            alert(e);
+            toastr.error(e);
         });
     }
+    $("#changelimit").change(function () {
+        viewmodel.numbertodisplay(parseInt($(this).val()));
+        var query = new breeze.EntityQuery().from("GetPosts").orderByDesc(viewmodel.orderbyfield()).take(viewmodel.numbertodisplay());
+        manager.executeQuery(query).then(function (data) {
+            viewmodel.posts(data.results);
+        }).fail(function (e) {
+            toastr.error(e);
+        });
+    });
+    $("#resort").change(function () {
+        var sortval = $(this).val();
+        //alert(sortval);
+        
+        if (sortval == "Oldest First") {
+            viewmodel.orderbyfield("PostCreated");
+        }
+        else if (sortval == "Alphanumeric") {
+            viewmodel.orderbyfield("PostTitle");
+        }
+        else {
+            viewmodel.orderbyfield("PostCreated desc");
+        }
+        var query = new breeze.EntityQuery().from("GetPosts").orderBy(viewmodel.orderbyfield()).take(viewmodel.numbertodisplay());
+
+        manager.executeQuery(query).then(function (data) {
+            viewmodel.posts(data.results);
+        }).fail(function (e) {
+            toastr.error(e);
+        });
+
+    });
+
     $(document).on("click",".showsettings",function (e) {
         var btn = $(this);
         btn.button('loading');
@@ -221,21 +259,30 @@ $(document).ready(function () {
 
     //tagging
     $("#addtagbutton").click(function () {
-        $.ajax({
-            url: "/api/posts/tag",
-            type: "POST",
-            data: {postid: $(this).attr("postid"), tag: $("#addtag").val(), "delete": false},
-            success: function (msg) {
-                if (msg.indexOf("Deleted") == 0) {
-                    toastr.error(msg);
+        var tagval = $("#addtag").val();
+        if (tagval.length > 1) {
+            $.ajax({
+                url: "/api/posts/tag",
+                type: "POST",
+                data: { postid: $(this).attr("postid"), tag: tagval, "delete": false },
+                success: function (msg) {
+                    if (msg.indexOf("Deleted") == 0) {
+                        toastr.error(msg);
+                    }
+                    else {
+                        $("#addtag").val("");
+                        toastr.success(msg);
+                        viewmodel.myobj.PostTags.push(tagval);
+                    }
                 }
-                else {
-                    toastr.success(msg);
-                    viewmodel.myobj.PostTags.push($("#addtag").val());
-                }
-            }
-        });
+            });
+        }
+        else {
+            toastr.error("Please enter a tag");
+        }
+        
     });
+
     $(document).on("click",".deletetag",function () {
         var txt = $(this).text();
         $.ajax({

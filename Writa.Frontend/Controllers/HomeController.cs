@@ -120,9 +120,18 @@ namespace Writa.Frontend.Controllers
             p.Settings = Writa.Frontend.MvcApplication.GlobalSettings;
 
             WritaPost pagepost = _dtahelper.GetPostFromSlug(id);
+
             
             if (pagepost != null)
             {
+                if (pagepost.PostRedirect != null)
+                {
+                    if (pagepost.PostRedirect.Length > 2)
+                    {
+                        Response.Redirect("~/" + pagepost.PostRedirect);
+                    }
+                }
+
                 pagefound = true;
                 p.Post = pagepost;
                 p.PageTitle = p.Post.PostTitle;

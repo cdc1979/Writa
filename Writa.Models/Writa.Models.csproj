@@ -90,6 +90,7 @@
     <Compile Include="RssHelper.cs" />
     <Compile Include="Settings\FileSettings.cs" />
     <Compile Include="Settings\ISettingsLoader.cs" />
+    <Compile Include="Stats\WritaStats.cs" />
     <Compile Include="StringTools.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
     <Compile Include="WritaPage.cs" />

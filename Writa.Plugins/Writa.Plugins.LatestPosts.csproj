@@ -57,6 +57,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\Widgets\_TagCloud.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Web.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Q /Y "$(TargetPath)" "$(SolutionDir)\Writa.Frontend\bin\"</PostBuildEvent>

@@ -29,16 +29,16 @@
         <div class="col-lg-3">
             <table class="table table-striped table-bordered">
             <thead>
-                <tr><th>Your Pages</th></tr>
+                <tr><th>Your Posts <select class="pull-right" id="changelimit" data-bind="options: availablenums"></select> <select class="pull-right" id="resort"><option>Newest First</option><option>Oldest First</option><option>Alphanumeric</option></select> </th></tr>
             </thead>
             <tbody data-bind="foreach: posts">
                 <tr>
                     <td style="width: 100%; padding: 10px;" class="item">
-                        <button data-bind="attr: { postid: PostId }, clickBubble: false" class="showsettings btn btn-primary pull-right"><i class="fa fa-gear"></i></button>
+                        <button data-bind="attr: { postid: PostId }, clickBubble: false" class="showsettings btn btn-primary btn-sm pull-right"><i class="fa fa-gear"></i></button>
                         <div data-bind="attr: { postid: PostId }, click: $root.postClick">
-                        <div data-bind="text: moment(PostCreated).format('L')"></div>
-                        <div data-bind="text: PostTitle"></div>
-                            </div>
+                            <div data-bind="text: moment(PostCreated).format('L')"></div>
+                            <div style="font-size: 0.9em;" data-bind="text: PostTitle"></div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -56,9 +56,9 @@
             <div class="clearfix">
                 <input type="hidden" id="postid" data-bind="value: myobj.PostId" />
                 <div data-bind="foreach: myobj.PostTags"><span class="btn btn-default btn-xs deletetag" data-bind="text:$data"></span></div>
-                <input type="text" placeholder="Tag This Page" id="addtag" /><button id="addtagbutton" data-bind="attr: { postid: myobj.PostId }" class="btn btn-warning btn-sm"><i class="fa fa-plus"></i></button>
+                <input type="text" style="font-size: 0.8em; padding: 2px; border: 0px;" placeholder="Tag This Page" id="addtag" /><button id="addtagbutton" data-bind="attr: { postid: myobj.PostId }" class="btn btn-warning btn-xs"><i class="fa fa-plus"></i></button>
             <div class="pull-right">
-                <a href="#" class="btn btn-success btn-sm" data-bind="attr: {postid:myobj.PostId}" id="updatepostbutton">Save Changes</a>
+                <a href="#" class="btn btn-success btn-sm" data-bind="attr: {postid:myobj.PostId}" id="updatepostbutton"><i class="fa fa-save"></i> Save Changes</a>
             </div>
                 </div>
         </div>

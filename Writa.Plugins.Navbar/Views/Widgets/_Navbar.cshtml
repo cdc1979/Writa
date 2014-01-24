@@ -24,9 +24,9 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
-    @foreach (var f in datahelper.GetPosts().AsQueryable().Where(w => w.PostType == WritaPostType.STATICPAGE).ToList())
+    @foreach (WritaPost f in datahelper.GetAllPosts().AsQueryable().Where(w => w.PostType == WritaPostType.STATICPAGE).ToList())
     {
-      <li><a href="#">@f.PostTitle</a></li>  
+      <li><a href="/@f.PostSlug">@f.PostTitle</a></li>  
     }
       
     </ul>

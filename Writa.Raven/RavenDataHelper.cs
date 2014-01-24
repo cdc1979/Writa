@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Writa.Models;
 using Writa.Models.Install;
 using Writa.Models.Settings;
+using Writa.Models.Stats;
 using Raven;
 using Raven.Abstractions.Data;
 using Raven.Database;
@@ -343,6 +344,20 @@ namespace Writa.Data
         {
             docStore.DatabaseCommands.DeleteByIndex("Auto/WritaPosts", new IndexQuery(), true);
             return true;
+        }
+
+        public WritaStats GetStats()
+        {
+            WritaStats s = new WritaStats();
+            using (var session = docStore.OpenSession())
+            {
+                s.NumberOfPosts = session.Query<WritaPost>().AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).Count();
+                s.NumberOfStaticPages = session.Query<WritaPost>().AsQueryable().Where(w => w.PostType != WritaPostType.BLOGPOST).Count();
+                s.LastPostDate = session.Query<WritaPost>().AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).OrderByDescending(w => w.PostCreated).Take(1).First().PostCreated;
+            }
+            var config = LoadSettings();
+            s.ActiveTheme = config.BlogTheme;
+            return s;
         }
     }
 

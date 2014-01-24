@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Writa.Models;
 using Writa.Models.Settings;
+using Writa.Models.Stats;
 using Writa.Models.Install;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -245,6 +246,17 @@ namespace Writa.Data
         {
             database.GetCollection<WritaPost>("Posts").RemoveAll();
             return true;
+        }
+
+        public WritaStats GetStats()
+        {
+            WritaStats s = new WritaStats();
+            s.NumberOfPosts = database.GetCollection<WritaPost>("Posts").AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).Count();
+            s.NumberOfStaticPages = database.GetCollection<WritaPost>("Posts").AsQueryable().Where(w => w.PostType != WritaPostType.BLOGPOST).Count();
+            s.LastPostDate = database.GetCollection<WritaPost>("Posts").AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).OrderByDescending(w => w.PostCreated).Take(1).First().PostCreated;
+            var config = LoadSettings();
+            s.ActiveTheme = config.BlogTheme;
+            return s;
         }
     }
 }

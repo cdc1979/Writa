@@ -141,6 +141,7 @@ namespace Writa.Frontend.Controllers.api
                 WritaPost x = _dbhelper.GetPostFromId(u.PostId);
                 x.PostSlug = StringTools.ReplaceBadInUrl(u.PostSlug);
                 x.PostTitle = u.PostTitle;
+                x.PostRedirect = u.PostRedirect;
                 x.PostType = u.PostType;
                 x.PostStatus = u.PostStatus;
                 x.PostCreated = u.PostCreated;

@@ -1,0 +1,32 @@
+Version 0.2.0
+
+Bug Fixes
+
+- URL Encoded Tag Links in Tag Widget
+- Tidied up Tag Widget
+- Fixed Tag Field Text not emptying itself when saving
+- Added "Tag is required" validation when tagging a post
+
+Features
+
+- Added a new Theme "Tech"
+- Added a stats function, to show basic information on the dashboard
+- Added a stats helper function within each data provider
+- Added a new redirection function, you can now redirect any post or page to another url
+- Can now sort and adjust the number of items shown in the admin editor
+
+External Libraries
+
+- Updated MVC to 5.1
+- Updated Web Api to 2.1
+- Updated Breeze.js to 1.4.8
+- Updated AutoFac to 3.3.0
+- Updated MomentJs to 2.5.0
+- Updated DropzoneJs to 3.8.3
+- Updated EmbeddedVirtualResourceProvider to 1.2.21
+- Updated Q.js to 1.0.0
+- Updated Bootstrap admin theme to 3.0.3
+
+Version 0.1.0
+
+- First Public Release

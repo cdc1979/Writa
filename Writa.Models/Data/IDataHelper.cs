@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Writa.Models.Settings;
+using Writa.Models.Stats;
 namespace Writa.Models
 {
     public interface IDataHelper
@@ -40,6 +41,8 @@ namespace Writa.Models
         void UpdatePluginValue(string sid, string value);
         void DeletePluginValue(string sid);
         IQueryable<WritaPluginSetting> GetPluginSettings();
+
+        WritaStats GetStats();
 
     }
 }

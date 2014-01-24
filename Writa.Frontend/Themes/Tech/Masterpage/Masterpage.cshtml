@@ -1,0 +1,23 @@
+﻿@model Writa.Models.WritaPage
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="@Model.PageDescription" />
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+@Html.Partial("_Header", Model)
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.rss">
+<title>@Model.PageTitle</title>
+</head>
+<body>
+    <header style="height: 140px; color: #666; padding: 30px; padding-top: 20px; text-align: left;">
+        <h1 style="font-size: 2.2em;font-family: 'Francois One', sans-serif;"><a style="text-decoration: none; color: #333;" title="@Model.BlogSettings.BlogSummary" href="@Url.Content("~")">@Model.BlogSettings.BlogTitle</a></h1>
+        <p>@Model.BlogSettings.BlogSummary</p>
+    </header>
+    @Html.Partial("~/Views/Widgets/_Navbar.cshtml")
+    @RenderBody()
+    @Html.Partial("_Footer")
+    @Html.Partial("~/Views/_GoogleAnalytics.cshtml")
+</body>
+</html>

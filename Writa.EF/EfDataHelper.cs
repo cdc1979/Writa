@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using Writa.Models;
 using Writa.Models.Install;
 using Writa.Models.Settings;
+using Writa.Models.Stats;
 
 namespace Writa.Data
 {
-    public class SchoolContext : DbContext
+    public class WritaBlogContext : DbContext
     {
 
-        public SchoolContext() : base("Writa")
+        public WritaBlogContext() : base("Writa")
         {
 
         }
@@ -50,7 +51,7 @@ namespace Writa.Data
 
         public WritaSettings LoadSettings()
         {
-            using (var db = new SchoolContext())
+            using (var db = new WritaBlogContext())
             {
                 return db.WritaSettings.Take(1).SingleOrDefault();
             }
@@ -58,7 +59,7 @@ namespace Writa.Data
 
         public WritaSettings SaveSettings(WritaSettings s)
         {
-            using (var db = new SchoolContext())
+            using (var db = new WritaBlogContext())
             {
                 var x = db.WritaSettings.Take(1).SingleOrDefault();
                 x.BlogTheme = s.BlogTheme;
@@ -73,7 +74,7 @@ namespace Writa.Data
 
         public void CheckInstall(GlobalSettings s)
         {
-            using (var db = new SchoolContext())
+            using (var db = new WritaBlogContext())
             {
                 if (db.WritaPosts.Count() == 0)
                 {
@@ -89,7 +90,7 @@ namespace Writa.Data
 
         public WritaPost CreatePost(WritaPost p)
         {
-            using (var db = new SchoolContext())
+            using (var db = new WritaBlogContext())
             {
 
                 p.PostId = System.Guid.NewGuid().ToString();
@@ -124,13 +125,13 @@ namespace Writa.Data
 
         public IQueryable<WritaPost> GetPosts()
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaPosts.AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).AsQueryable();
         }
 
         public IQueryable<WritaPost> GetAllPosts()
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaPosts.AsQueryable();
         }
 
@@ -141,19 +142,19 @@ namespace Writa.Data
 
         public WritaPost GetPostFromSlug(string slug)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaPosts.AsQueryable().Where(w => w.PostSlug == slug.ToLower()).SingleOrDefault();
         }
 
         public WritaPost GetPostFromId(string id)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaPosts.AsQueryable().Where(w => w.PostId == id).SingleOrDefault();
         }
 
         public WritaUser CreateUser(WritaUser u)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             u.Id = System.Guid.NewGuid().ToString();
             db.WritaUsers.Add(u);
             db.SaveChanges();
@@ -177,25 +178,25 @@ namespace Writa.Data
 
         public WritaUser GetUserByEmail(WritaUser u)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaUsers.AsQueryable().Where(w => w.Id == u.EmailAddress).SingleOrDefault();
         }
 
         public WritaUser GetUserById(WritaUser u)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaUsers.AsQueryable().Where(w=>w.Id == u.Id).SingleOrDefault();
         }
 
         public IQueryable<WritaUser> GetUsers()
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaUsers.AsQueryable();
         }
 
         public WritaPluginSetting GetPluginSettings(string PluginName, string Key, string DefaultValue)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var exists = db.WritaPluginSettings.AsQueryable().Where(w => w.PluginName == PluginName && w.Key == Key).SingleOrDefault();
             if (exists != null)
             {
@@ -214,7 +215,7 @@ namespace Writa.Data
 
         public WritaPost GetNextPost(WritaPost p)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var x = db.WritaPosts.AsQueryable().Where(w => w.PostCreated > p.PostCreated && w.PostType == WritaPostType.BLOGPOST && w.PostStatus == WritaPostStatus.PUBLISHED).OrderBy(w => w.PostCreated).Take(1).ToList();
             if (x.Count == 1)
             {
@@ -228,7 +229,7 @@ namespace Writa.Data
 
         public WritaPost GetPreviousPost(WritaPost p)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var x = db.WritaPosts.AsQueryable().Where(w => w.PostCreated < p.PostCreated && w.PostType == WritaPostType.BLOGPOST && w.PostStatus == WritaPostStatus.PUBLISHED).OrderByDescending(w => w.PostCreated).Take(1).ToList();
             if (x.Count == 1)
             {
@@ -243,14 +244,14 @@ namespace Writa.Data
 
         public IQueryable<WritaPluginSetting> GetPluginSettings()
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             return db.WritaPluginSettings.AsQueryable();
         }
 
 
         public void UpdatePluginValue(string sid, string value)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var plugin = db.WritaPluginSettings.AsQueryable().Where(w=>w.Id == sid).SingleOrDefault();
             plugin.Value = value;
             db.SaveChanges();
@@ -259,7 +260,7 @@ namespace Writa.Data
 
         public void DeletePluginValue(string sid)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var plugin = db.WritaPluginSettings.AsQueryable().Where(w=>w.Id == sid).SingleOrDefault();
             db.WritaPluginSettings.Remove(plugin);
             db.SaveChanges();
@@ -268,7 +269,7 @@ namespace Writa.Data
 
         public bool DeletePost(string postid)
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var plugin = db.WritaPosts.AsQueryable().Where(w => w.PostId == postid).SingleOrDefault();
             db.WritaPosts.Remove(plugin);
             db.SaveChanges();
@@ -278,11 +279,26 @@ namespace Writa.Data
 
         public bool DeleteAllPosts()
         {
-            var db = new SchoolContext();
+            var db = new WritaBlogContext();
             var plugin = db.WritaPosts.AsQueryable().ToList();
             db.WritaPosts.RemoveRange(plugin);
             db.SaveChanges();
             return true;
+        }
+
+        public WritaStats GetStats()
+        {
+
+            WritaStats s = new WritaStats();
+            var db = new WritaBlogContext();
+
+                s.NumberOfPosts = db.WritaPosts.AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).Count();
+                s.NumberOfStaticPages = db.WritaPosts.AsQueryable().Where(w => w.PostType != WritaPostType.BLOGPOST).Count();
+                s.LastPostDate = db.WritaPosts.AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).OrderByDescending(w => w.PostCreated).Take(1).First().PostCreated;
+            
+            var config = LoadSettings();
+            s.ActiveTheme = config.BlogTheme;
+            return s;
         }
     }
 }

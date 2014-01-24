@@ -1,8 +1,10 @@
 ﻿@using Writa.Models
+@using Writa.Models.Stats
 @model IDataHelper
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    WritaStats stats = Model.GetStats();
 }
 @section PageJavaScript
 {
@@ -26,12 +28,46 @@
                         <td>Restore Database</td><td align="right"><button id="restorebutton" class="btn btn-success">Go</button></td>
                     </tr>
                     <tr>
-                        <td>Add To Showcase</td><td align="right"><button id="showcasebutton" class="btn btn-success">Go</button></td>
+                        <td>Add To <a href="#" data-toggle="modal" data-target="#showcasemodal">Showcase</a></td><td align="right"><button id="showcasebutton" class="btn btn-success">Go</button></td>
                     </tr>
                         </tbody>
                 </table>
             </div>
-            <div class="well"><h4>Stats</h4><p>Placeholder</p></div>
+            <div class="well">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Writa Stats</h3>
+                    </div>
+                                        <!-- Table -->
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Number Of Posts</td>
+                                  <td>@stats.NumberOfPosts</td>
+                              </tr>
+                              <tr>
+                                  <td>Number Of Pages</td>
+                                  <td>@stats.NumberOfStaticPages</td>
+                              </tr>
+                              <tr>
+                                  <td>Last Post</td>
+                                  <td>@stats.LastPostDate.ToShortDateString()</td>
+                              </tr>
+                              <tr>
+                                  <td>Active Theme</td>
+                                  <td>@stats.ActiveTheme</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                </div>
+
+            </div>
         </div>
         <div class="col-lg-9">
             <div class="well"><h4>Latest Posts</h4>
@@ -74,6 +110,26 @@
       </div>
       <div class="modal-body" id="dashboardmodalbody">
         ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="showcasemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <i class="fa fa-question-circle"></i> Showcase Your Blog
+      </div>
+      <div class="modal-body">
+        <h3>The Writa Showcase</h3>
+        <p>Show off and share your blog at writa.org with our free showcase.  Your blog will get published along with hundreds of others and your posts might even get featured among our star posts.
+            Just click the Go button in your dashboard, and we will do the rest.
+        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

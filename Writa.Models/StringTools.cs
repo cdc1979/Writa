@@ -17,6 +17,7 @@ namespace Writa.Models
 
     public static class StringTools
     {
+
         public static string ReplaceBadInUrl(string input)
         {
             Regex rgx = new Regex("[^a-zA-Z0-9 -/]");

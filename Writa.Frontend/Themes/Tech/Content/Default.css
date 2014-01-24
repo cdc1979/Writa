@@ -1,0 +1,57 @@
+﻿html {
+    height: 100%;
+    max-height: 100%;
+    font-size: 62.5%;
+}
+
+body {
+    height: 100%;
+    max-height: 100%;
+    font-family: 'Droid Sans', serif;
+    line-height: 1.6em;
+    
+}
+
+ header {
+     background-image: url('headerbg.jpg');
+     background-repeat: no-repeat;
+     background-position: 400px -150px;
+ }
+
+::-moz-selection {
+    color: #222;
+    background: #D6EDFF;
+    text-shadow: none;
+}
+
+a{
+    color: #216BC9;
+}
+
+::selection {
+    color: #222;
+    background: #D6EDFF;
+    text-shadow: none;
+}
+
+h1, h2, h3, h4, h5
+{
+    font-family: 'Droid Serif', serif;
+}
+    .site-footer {
+        margin-top: 6rem;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.3rem;
+        line-height: 1.7em;
+        color: #BBC7CC;
+        text-align: center;
+    }
+pre {
+    margin: 20px;
+
+}
+
+.media-heading
+{
+    font-size: 1.4em;
+}
