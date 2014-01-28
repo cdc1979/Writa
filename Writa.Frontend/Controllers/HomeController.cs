@@ -34,11 +34,15 @@ namespace Writa.Frontend.Controllers
             WritaPluginSetting plh = _dtahelper.GetPluginSettings("Homepage", "Homepage Number Of Posts", "10");
             int numbr = int.Parse(plh.Value);
 
+            // get the post for the homepage
+            var f = _dtahelper.GetAllPosts().Where(w => w.PostType == WritaPostType.HOMEPAGE).FirstOrDefault();
+            
+
             WritaPage p = new WritaPage();
             p.Settings = Writa.Frontend.MvcApplication.GlobalSettings;
             p.BlogSettings = _blogsettings.LoadSettings();
-            p.PageTitle = p.BlogSettings.BlogTitle;
-            p.PageDescription = p.BlogSettings.BlogSummary;
+            p.PageTitle = f.PostTitle;
+            p.PageDescription = f.PostSummary;
             p.RelatedPosts = _dtahelper.GetPosts().Where(w => w.PostType == WritaPostType.BLOGPOST).OrderByDescending(w => w.PostCreated).Take(numbr).ToList();
             
             var updater = new ContainerBuilder();

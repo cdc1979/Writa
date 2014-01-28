@@ -72,19 +72,28 @@ namespace Writa.Data
             return s;
         }
 
-        public void CheckInstall(GlobalSettings s)
+        public bool CheckInstall(GlobalSettings s)
         {
-            using (var db = new WritaBlogContext())
+            try
             {
-                if (db.WritaPosts.Count() == 0)
+                using (var db = new WritaBlogContext())
                 {
-                    InstallSet set = InstallHelper.GetInstall();
-                    CreatePost(set.homepage);
-                    CreatePost(set.firstpost);
-                    db.WritaSettings.Add(set.settings);
-                    db.SaveChanges();
-                    //install.
+                    if (db.WritaPosts.Count() == 0)
+                    {
+                        InstallSet set = InstallHelper.GetInstall();
+                        CreatePost(set.homepage);
+                        CreatePost(set.firstpost);
+                        db.WritaSettings.Add(set.settings);
+                        db.SaveChanges();
+                        //install.
+                        
+                    }
                 }
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 

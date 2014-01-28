@@ -1,11 +1,13 @@
 Version 0.2.0
 
-Bug Fixes
+Changes/Fixes
 
 - URL Encoded Tag Links in Tag Widget
 - Tidied up Tag Widget
 - Fixed Tag Field Text not emptying itself when saving
 - Added "Tag is required" validation when tagging a post
+- Added validation to the blog settings page, and validated the page route that is entered
+- Switched some of the modal alerts to BootBoxjs for ease of use and readability
 
 Features
 

@@ -46,6 +46,24 @@ $(document).ready(function () {
 
     }
 
+    var validatetemplate = {
+        highlight: function (element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+        unhighlight: function (element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    };
+
     var editor = new EpicEditor(opts).load(function () { /*alert("loaded!");*/ });
 
     var dataService = new breeze.DataService({
@@ -191,25 +209,38 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#savesettingsform", function (e) {
-        var formdata = $("#settingsform").serialize();
-        //alert(formdata);
-        var btn = $(this);
-        btn.button('loading');
-        $.ajax({
-            url: "/api/posts/updatesettings",
-            type: "POST",
-            //contentType: 'application/json',
-            data: formdata,
-            success: function (msg) {
-                btn.button('reset');
-                if (msg.indexOf("Error") == 0) {
-                    toastr.error(msg);
-                }
-                else {
-                    toastr.success(msg);
-                }
+        $("#settingsform").validate(validatetemplate);
+        if ($("#settingsform").valid()) {
+
+            var firstroutechar = $("#PostSlug").val().charAt(0);
+            if (firstroutechar == "/") {
+                toastr.error('Route cannot start with "/" - please remove before saving');
+            } else {
+
+                var formdata = $("#settingsform").serialize();
+                //alert(formdata);
+                var btn = $(this);
+                btn.button('loading');
+                $.ajax({
+                    url: "/api/posts/updatesettings",
+                    type: "POST",
+                    //contentType: 'application/json',
+                    data: formdata,
+                    success: function (msg) {
+                        btn.button('reset');
+                        if (msg.indexOf("Error") == 0) {
+                            toastr.error(msg);
+                        }
+                        else {
+                            toastr.success(msg);
+                        }
+                    }
+                });
             }
-        });
+        }
+        else {
+
+        }
         e.preventDefault();
     });
 

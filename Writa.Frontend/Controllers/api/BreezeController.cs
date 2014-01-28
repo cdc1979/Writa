@@ -24,11 +24,13 @@ namespace Writa.Frontend.Controllers.api
             _datahelper = d;
         }
 
+        [Authorize]
         public IQueryable<WritaPost> GetPosts()
         {
             return _datahelper.GetAllPosts();
         }
 
+        [Authorize]
         public WritaPost GetPost(string postid)
         {
             return _datahelper.GetPostFromId(postid);

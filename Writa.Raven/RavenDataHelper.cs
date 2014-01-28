@@ -37,27 +37,34 @@ namespace Writa.Data
             _settings = s;
         }
 
-        public void CheckInstall(GlobalSettings s)
+        public bool CheckInstall(GlobalSettings s)
         {
-            
-            using (var session =  docStore.OpenSession())
+            try
             {
-                var results = session.Query<WritaPost>().Count();
-                if (results == 0)
+                using (var session = docStore.OpenSession())
                 {
-                    InstallSet set = InstallHelper.GetInstall();
-                    CreatePost(set.homepage);
-                    CreatePost(set.firstpost);
-                    //db.WritaSettings.Add(set.settings);
-                    //db.SaveChanges();
-                    using (var f = docStore.OpenSession())
+                    var results = session.Query<WritaPost>().Count();
+                    if (results == 0)
                     {
-                        f.Store(set.settings);
-                        f.SaveChanges();
+                        InstallSet set = InstallHelper.GetInstall();
+                        CreatePost(set.homepage);
+                        CreatePost(set.firstpost);
+                        //db.WritaSettings.Add(set.settings);
+                        //db.SaveChanges();
+                        using (var f = docStore.OpenSession())
+                        {
+                            f.Store(set.settings);
+                            f.SaveChanges();
+                        }
+                        //install.
                     }
-                    //install.
+                    session.SaveChanges();
                 }
-                session.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
             System.Threading.Thread.Sleep(3000);
             

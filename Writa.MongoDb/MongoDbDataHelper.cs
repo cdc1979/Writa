@@ -129,15 +129,24 @@ namespace Writa.Data
             return database.GetCollection<WritaUser>("Users").AsQueryable();
         }
 
-        public void CheckInstall(GlobalSettings s)
+        public bool CheckInstall(GlobalSettings s)
         {
-            if (!database.GetCollection<WritaPost>("Posts").Exists())
+            try
             {
-                InstallSet set = InstallHelper.GetInstall();
-                CreatePost(set.homepage);
-                CreatePost(set.firstpost);
-                database.GetCollection<WritaSettings>("Settings").Save(set.settings);
-                //install.
+                server.Ping();
+                if (!database.GetCollection<WritaPost>("Posts").Exists())
+                {
+                    InstallSet set = InstallHelper.GetInstall();
+                    CreatePost(set.homepage);
+                    CreatePost(set.firstpost);
+                    database.GetCollection<WritaSettings>("Settings").Save(set.settings);
+                    //install.
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
             }
 
         }

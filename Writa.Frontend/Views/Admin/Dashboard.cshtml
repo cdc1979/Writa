@@ -28,7 +28,7 @@
                         <td>Restore Database</td><td align="right"><button id="restorebutton" class="btn btn-success">Go</button></td>
                     </tr>
                     <tr>
-                        <td>Add To <a href="#" data-toggle="modal" data-target="#showcasemodal">Showcase</a></td><td align="right"><button id="showcasebutton" class="btn btn-success">Go</button></td>
+                        <td>Add To <a href="#" id="showcaseinfo">Showcase</a></td><td align="right"><button id="showcasebutton" class="btn btn-success">Go</button></td>
                     </tr>
                         </tbody>
                 </table>
@@ -75,20 +75,30 @@
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Date Created</th>
+                            <th>Created On</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                @foreach (var f in Model.GetAllPosts())
+                @foreach (var f in Model.GetAllPosts().Take(10).OrderByDescending(w=>w.PostCreated))
                 {
                     <tr>
                         <td>
                             @f.PostTitle
                         </td>
-                        <td>@f.PostCreated</td>
+                        <td>@f.PostCreated.ToShortDateString()</td>
                         <td>
                             @f.PostStatus
+                        </td>
+                        <td>
+                            @if (f.PostType == WritaPostType.HOMEPAGE)
+                            {
+                            <a title="This is your hoempage" href="/@f.PostSlug"><i class="fa fa-home"></i></a>
+                            }
+                            else {
+                            <a href="/@f.PostSlug"><i class="fa fa-search"></i></a>
+                            }
                         </td>
                     </tr>
                 }
@@ -99,41 +109,3 @@
         </div>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="dashboardmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="dashboardmodallabel"></h4>
-      </div>
-      <div class="modal-body" id="dashboardmodalbody">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="showcasemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-          <i class="fa fa-question-circle"></i> Showcase Your Blog
-      </div>
-      <div class="modal-body">
-        <h3>The Writa Showcase</h3>
-        <p>Show off and share your blog at writa.org with our free showcase.  Your blog will get published along with hundreds of others and your posts might even get featured among our star posts.
-            Just click the Go button in your dashboard, and we will do the rest.
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->

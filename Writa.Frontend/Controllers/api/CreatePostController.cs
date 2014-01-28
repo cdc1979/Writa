@@ -31,6 +31,7 @@ namespace Writa.Frontend.Controllers.api
         }
 
         // POST api/<controller>
+        [Authorize]
         public string Post(string PostTitle, string PostMarkdown)
         {
 

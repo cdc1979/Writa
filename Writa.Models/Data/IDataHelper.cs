@@ -10,7 +10,7 @@ namespace Writa.Models
     public interface IDataHelper
     {
 
-        void CheckInstall(GlobalSettings s);
+        bool CheckInstall(GlobalSettings s);
 
         WritaPost CreatePost(WritaPost p);
         void DeletePost(WritaPost p);

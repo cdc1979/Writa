@@ -36,7 +36,7 @@ namespace Writa.Frontend
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             GlobalConfiguration.Configuration.EnsureInitialized();
 
-
+            
         }
 
         public static void Inject()
@@ -46,7 +46,6 @@ namespace Writa.Frontend
             var configcontainer = configbuilder.Build();
             ISettingsLoader i = configcontainer.Resolve<ISettingsLoader>();
             GlobalSettings = i.LoadSettings();
-
             
             if (GlobalSettings.BlogDb == DbType.MONGODB)
             {
@@ -76,22 +75,27 @@ namespace Writa.Frontend
             // get dbhelper.
 
                 IDataHelper h = container.Resolve<IDataHelper>();
-                h.CheckInstall(GlobalSettings);
                 
-                RouteConfig.RegisterRoutes(RouteTable.Routes, h);
+                var installresult = h.CheckInstall(GlobalSettings);
+                if (installresult)
+                {
+                    RouteConfig.RegisterRoutes(RouteTable.Routes, h);
 
-                IBlogSettingsLoader b = container.Resolve<IBlogSettingsLoader>();
-                GenerateVE(b.LoadSettings().BlogTheme);
+                    IBlogSettingsLoader b = container.Resolve<IBlogSettingsLoader>();
+                    GenerateVE(b.LoadSettings().BlogTheme);
 
 
-                // check for enabled plugins.
+                    // check for enabled plugins.
 
-                DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-                var resolver = new AutofacWebApiDependencyResolver(container);
-                GlobalConfiguration.Configuration.DependencyResolver = resolver;
+                    DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+                    var resolver = new AutofacWebApiDependencyResolver(container);
+                    GlobalConfiguration.Configuration.DependencyResolver = resolver;
+                }
+                else
+                {
+
+                }
                 //install
-
-            
         }
         // this allows us to reset the theme
         public static void GenerateVE(string theme)

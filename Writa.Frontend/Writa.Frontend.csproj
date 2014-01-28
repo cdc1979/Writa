@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.2.0\lib\net40\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.3.3.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -133,8 +133,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.0\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.OData">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.0.0\lib\net45\System.Web.Http.OData.dll</HintPath>
+    <Reference Include="System.Web.Http.OData, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.1.0\lib\net45\System.Web.Http.OData.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -215,6 +216,8 @@
     <Content Include="LICENSE.txt" />
     <None Include="Properties\PublishProfiles\FileSYstem.pubxml" />
     <Content Include="robots.txt" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <None Include="Scripts\breeze.intellisense.js" />
@@ -261,6 +264,9 @@
     <Content Include="Scripts\google-code-prettify\prettify.css" />
     <Content Include="Scripts\google-code-prettify\prettify.js" />
     <Content Include="Scripts\google-code-prettify\run_prettify.js" />
+    <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.0.js" />
+    <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -281,9 +287,6 @@
     <Content Include="Scripts\datepicker\less\datepicker.less" />
     <Content Include="Scripts\dropzone\css\stylus\dropzone.styl" />
     <Content Include="Scripts\dropzone\css\stylus\basic.styl" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\knockout-3.0.0.debug.js" />
     <Content Include="Scripts\knockout-3.0.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
@@ -307,6 +310,7 @@
     <Content Include="Themes\Dark\Content\Default.css" />
     <Content Include="Themes\Default\Content\Default.css" />
     <Content Include="Themes\Tech\Content\Default.css" />
+    <Content Include="Themes\Tech\Content\headerbg.jpg" />
     <Content Include="Themes\Writa\Content\Default.css" />
     <Content Include="Themes\Writa\header.jpg" />
     <Content Include="Web.config">
@@ -325,7 +329,6 @@
     <Content Include="Views\Admin\Content.cshtml" />
     <Content Include="Views\Admin\_UpdatePostSettings.cshtml" />
     <Content Include="Themes\Default\Templates\StaticPage.cshtml" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Admin\Media.cshtml" />
     <Content Include="Views\Admin\_SelectImage.cshtml" />
@@ -339,6 +342,7 @@
     <Content Include="Themes\Writa\Partials\_Header.cshtml" />
     <Content Include="Themes\Tech\Masterpage\Masterpage.cshtml" />
     <Content Include="Themes\Tech\Partials\_Header.cshtml" />
+    <Content Include="Scripts\jquery-2.1.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
