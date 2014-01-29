@@ -6,7 +6,7 @@
 <meta name="description" content="@Model.PageDescription" />
 <link href='http://fonts.googleapis.com/css?family=Finger+Paint' rel='stylesheet' type='text/css'>
 @Html.Partial("_Header", Model)
-<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.rss">
+<link rel="alternate" type="application/rss+xml" title="@Model.BlogSettings.BlogTitle" href="/atom.rss">
 <title>@Model.PageTitle</title>
 </head>
 <body>

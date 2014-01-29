@@ -101,6 +101,11 @@ namespace Writa.Models
                 return string.Format("{0} weeks ago",
                 Math.Ceiling((double)dayDiff / 7));
             }
+            if (dayDiff < 365)
+            {
+                return string.Format("{0} months ago",
+                Math.Ceiling((double)dayDiff / 30));
+            }
             return null;
         }
     }

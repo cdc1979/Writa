@@ -82,7 +82,7 @@
 
     // showcase info popup
     $("#showcaseinfo").click(function () {
-        var msg = "<h3>The Writa Showcase</h3><p>Show off and share your blog at writa.org with our free showcase.  Your blog will get published along with hundreds of others and your posts might even get featured among our star posts.Just click the Go button in your dashboard, and we will do the rest.</p>";
+        var msg = "<h3>The Writa Showcase</h3><p>Show off and share your blog at writa.org with our free showcase.  Your blog will get published along with hundreds of others and your posts might even get featured among our star posts.</p><p>Just click the <a href='#' class='btn btn-success'>Go</a> button in your dashboard, and we will do the rest.</p><br/><br/><br/><br/>";
         bootbox.dialog({
             message: msg,
             title: '<i class="fa fa-question-circle"></i> Showcase Your Blog'

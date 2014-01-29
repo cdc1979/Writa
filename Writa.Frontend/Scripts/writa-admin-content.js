@@ -96,8 +96,6 @@ $(document).ready(function () {
     
 
     viewmodel.postClick = function (obj) {
-        $("[postid]").parent().parent().removeClass("success");
-        $("[postid='" + obj.PostId + "']").parent().parent().addClass("success");
         var queryx = new breeze.EntityQuery().from("GetPost").withParameters({ postid: obj.PostId });
         manager.executeQuery(queryx).then(function (data) {
             ko.viewmodel.updateFromModel(viewmodel.myobj, data.results[0]);
@@ -106,6 +104,7 @@ $(document).ready(function () {
             toastr.error(e);
         });
     }
+
     $("#changelimit").change(function () {
         viewmodel.numbertodisplay(parseInt($(this).val()));
         var query = new breeze.EntityQuery().from("GetPosts").orderByDesc(viewmodel.orderbyfield()).take(viewmodel.numbertodisplay());
