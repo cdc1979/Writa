@@ -95,7 +95,7 @@
           else {
           <option value="" selected="selected">-- No Parent --</option>    
           }
-          @foreach (var p in Model._db.GetAllPosts().Select(w=> new { PostTitle = w.PostId, PostId = w.PostId }))
+          @foreach (var p in Model._db.GetAllPosts().Select(w=> new { PostTitle = w.PostTitle, PostId = w.PostId }))
           {
               if (p.PostId == Model.post.PostParent) {
               <option value="@p.PostId" selected="selected">@p.PostTitle</option>    
