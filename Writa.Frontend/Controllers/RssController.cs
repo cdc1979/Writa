@@ -45,10 +45,6 @@ namespace Writa.Frontend.Controllers
     
             }
 
-
-            
-
-            string s = "";
             SyndicationFeed feed = new SyndicationFeed(sx)
             {
                 Title = new TextSyndicationContent(setts.BlogTitle),

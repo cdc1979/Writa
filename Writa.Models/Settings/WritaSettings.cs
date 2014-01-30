@@ -34,7 +34,7 @@ namespace Writa.Models.Settings
         public string EmailUsername { get; set; }
         public string EmailPassword { get; set; }
     }
-    public enum EmailType { SMTP, GMAIL, AMAZONSES }
+    public enum EmailType { SMTP, GMAIL, AMAZONSES, API }
     public enum DbType { MONGODB, EF, RAVEN_EMBEDDED } //0 = mongodb, 1 = EF, 2 = Ravendb
 
     /*

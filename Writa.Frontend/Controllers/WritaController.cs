@@ -182,9 +182,6 @@ namespace Writa.Frontend.Controllers
                 // ViewBag.LoginError = "<div class=\"ui-state-error\">Username/Password Not Found </div>";
                 return View("~/Views/Admin/Login.cshtml", "~/Views/Admin/_Adminlayout.cshtml");
             }
-
-
-            return View("Index");
         }
 
         [HttpPost]
@@ -373,7 +370,7 @@ namespace Writa.Frontend.Controllers
                 string subject = "Your Writa password reset";
                 string body = "Your new writa password is " + newpass;
 
-                _email.SendEmail(subject, body, "", "");
+                _email.SendEmail(subject, body, email, _globalsettings.LoadSettings().EmailFromAddress);
                 ViewBag.Sent = true;
             }
             else

@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Writa.Models.Settings;
-
-namespace Writa.Models.Email 
+using Writa.Models.Email;
+namespace Writa.EmailProviders
 {
-    public class SmtpSender : IEmailSend
+    public class SmtpEmailProvider : IEmailSend
     {
         GlobalSettings g;
 
-        public SmtpSender(ISettingsLoader settings)
+        public SmtpEmailProvider(GlobalSettings settings)
         {
-            g = settings.LoadSettings();
+            g = settings;
         }
 
         public void SendEmail(string subject, string body, string to, string from)
         {
-            
+
         }
     }
 }

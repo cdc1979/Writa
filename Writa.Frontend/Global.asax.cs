@@ -9,12 +9,13 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Writa;
 using Writa.Models;
+using Writa.Models.Email;
 using Writa.Models.Settings;
 using Writa.Data;
 using Writa.Frontend.Models;
-using Writa.Models.Email;
-
+using Writa.EmailProviders;
 
 namespace Writa.Frontend
 {
@@ -46,7 +47,9 @@ namespace Writa.Frontend
             var configcontainer = configbuilder.Build();
             ISettingsLoader i = configcontainer.Resolve<ISettingsLoader>();
             GlobalSettings = i.LoadSettings();
-            
+
+            builder.RegisterInstance(i).As<ISettingsLoader>();
+
             if (GlobalSettings.BlogDb == DbType.MONGODB)
             {
                 builder.RegisterInstance(new MongoDbDataHelper(GlobalSettings)).As<IDataHelper, IBlogSettingsLoader>();
@@ -60,11 +63,14 @@ namespace Writa.Frontend
                 builder.RegisterInstance(new RavenDataHelper(GlobalSettings, HttpContext.Current.Server.MapPath(GlobalSettings.LocalDbPath))).As<IDataHelper, IBlogSettingsLoader>().SingleInstance();
             }
 
-            //if (GlobalSettings.BlogEmailMethod == EmailType.SMTP)
-            //{
-                builder.RegisterType<FileSettingsLoader>().As<ISettingsLoader>();
-                builder.RegisterInstance(new SmtpSender(i)).As<IEmailSend>();
-            //}
+            if (GlobalSettings.BlogEmailMethod == EmailType.SMTP)
+            {
+                builder.RegisterInstance(new SmtpEmailProvider(GlobalSettings)).As<IEmailSend>();
+            }
+            else if (GlobalSettings.BlogEmailMethod == EmailType.API)
+            {
+                builder.RegisterInstance(new ApiEmailProvider(GlobalSettings)).As<IEmailSend>();
+            }
 
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());

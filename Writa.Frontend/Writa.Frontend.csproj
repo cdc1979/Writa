@@ -361,6 +361,14 @@
       <Project>{2fb4c9de-b2c1-4c1b-a929-ac11225a6a03}</Project>
       <Name>Writa.Data.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Writa.EmailProviders.Api\Writa.EmailProviders.Api.csproj">
+      <Project>{aa464198-112a-4600-9f5a-5d5cc244a5eb}</Project>
+      <Name>Writa.EmailProviders.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writa.EmailProviders.Smtp\Writa.EmailProviders.Smtp.csproj">
+      <Project>{362e5d41-18e8-42b1-8a29-59a40f698ac7}</Project>
+      <Name>Writa.EmailProviders.Smtp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Writa.Models\Writa.Models.csproj">
       <Project>{5e9ca810-284c-4b01-8017-d8ef68d7e87b}</Project>
       <Name>Writa.Models</Name>
