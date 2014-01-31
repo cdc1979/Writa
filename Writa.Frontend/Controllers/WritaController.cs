@@ -365,11 +365,12 @@ namespace Writa.Frontend.Controllers
             var user = _dbhelper.GetUserByEmail(new WritaUser() { EmailAddress = email });
             if (user != null)
             {
-                var newpass = System.Web.Security.Membership.GeneratePassword(10, 2);
+                var newpass = CreateRandomPassword(12);
                 var newEncpassword = BCrypt.Net.BCrypt.HashPassword(newpass, 13);
-                string subject = "Your Writa password reset";
+                string subject = "Your Writa Password Reset";
                 string body = "Your new writa password is " + newpass;
-
+                user.UserPasswordEncrypted = newEncpassword;
+                _dbhelper.UpdateUser(user);
                 _email.SendEmail(subject, body, email, _globalsettings.LoadSettings().EmailFromAddress);
                 ViewBag.Sent = true;
             }
@@ -384,6 +385,16 @@ namespace Writa.Frontend.Controllers
         public PartialViewResult RestoreDb()
         {
             return PartialView("~/Views/Admin/_RestoreDb.cshtml");
+        }
+
+        public string CreateRandomPassword(int length)
+        {
+            string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            string res = "";
+            Random rnd = new Random();
+            while (0 < length--)
+                res += valid[rnd.Next(valid.Length)];
+            return res;
         }
 
     }

@@ -196,7 +196,13 @@ namespace Writa.Data
 
         public WritaUser UpdateUser(WritaUser u)
         {
-            throw new NotImplementedException();
+            using (var session = docStore.OpenSession())
+            {
+                WritaUser ux = session.Load<WritaUser>("writausers/" + u.Id);
+                ux.UserPasswordEncrypted = u.UserPasswordEncrypted;
+                session.SaveChanges();
+                return ux;
+            }
         }
 
         public WritaUser LogonUser(WritaUser u)

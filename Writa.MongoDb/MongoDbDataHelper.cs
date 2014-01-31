@@ -116,7 +116,8 @@ namespace Writa.Data
 
         public WritaUser UpdateUser(WritaUser u)
         {
-            throw new NotImplementedException();
+            database.GetCollection<WritaUser>("Users").Save(u);
+            return u;
         }
 
         public WritaUser LogonUser(WritaUser u)

@@ -177,7 +177,11 @@ namespace Writa.Data
 
         public WritaUser UpdateUser(WritaUser u)
         {
-            throw new NotImplementedException();
+            var db = new WritaBlogContext();
+            var euser = db.WritaUsers.AsQueryable().Where(w => w.Id == u.Id).SingleOrDefault();
+            euser.UserPasswordEncrypted = u.UserPasswordEncrypted;
+            db.SaveChanges();
+            return euser;
         }
 
         public WritaUser LogonUser(WritaUser u)
