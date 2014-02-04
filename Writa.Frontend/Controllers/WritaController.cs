@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Net.Mail;
 using System.Web.Security;
 using System.Web.Mvc;
 using Writa.Models;
@@ -370,9 +371,18 @@ namespace Writa.Frontend.Controllers
                 string subject = "Your Writa Password Reset";
                 string body = "Your new writa password is " + newpass;
                 user.UserPasswordEncrypted = newEncpassword;
-                _dbhelper.UpdateUser(user);
-                _email.SendEmail(subject, body, email, _globalsettings.LoadSettings().EmailFromAddress);
-                ViewBag.Sent = true;
+                try
+                {
+                    _email.SendEmail(subject, body, email, _globalsettings.LoadSettings().EmailFromAddress);
+                    _dbhelper.UpdateUser(user);
+                    ViewBag.Sent = true;
+                }
+                catch (SmtpException e)
+                {
+                    ViewBag.Sent = false;
+                    ViewBag.Error = true;
+                }
+                
             }
             else
             {
