@@ -25,6 +25,7 @@ namespace Writa.Frontend.Controllers.api
         }
 
         [Authorize]
+        [Queryable(EnableConstantParameterization = false)] // fix found here http://www.kacode.com/v973233-.html
         public IQueryable<WritaPost> GetPosts()
         {
             return _datahelper.GetAllPosts();

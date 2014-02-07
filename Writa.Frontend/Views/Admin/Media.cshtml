@@ -2,7 +2,14 @@
 @{
     ViewBag.Title = "Media";
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
-    var dirlist = Directory.GetFiles(Server.MapPath("~/Images"));
+    var dirlist = Directory.GetFiles(Server.MapPath("~/Images")).ToList();
+    var items = new List<string>();
+    foreach (string h in dirlist) 
+    {
+        if (!h.Contains(".txt")) {
+            items.Add(h);
+        }
+    }
 }
 @section PageJavaScript
 {
@@ -21,11 +28,11 @@
         </p>
           <div class="clearfix"></div>
           <div class="well" id="imagearea">
-              @if (dirlist.Count() == 0)
+              @if (items.Count() == 0)
               {
                   <p>You have not uploaded any image files.</p>
               }
-              @foreach (string f in dirlist)
+              @foreach (string f in items)
               {
                   FileInfo i = new FileInfo(f);
                   

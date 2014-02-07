@@ -197,6 +197,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CanonicalHelper.cs" />
     <Compile Include="Models\RebuildRoutes.cs" />
     <Compile Include="Models\WritaViewEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\Writa.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\readme.txt" />
     <Content Include="LICENSE.txt" />
     <None Include="Properties\PublishProfiles\FileSYstem.pubxml" />
     <Content Include="robots.txt" />
@@ -341,8 +343,9 @@
     <Content Include="Themes\Writa\Masterpage\Masterpage.cshtml" />
     <Content Include="Themes\Writa\Partials\_Header.cshtml" />
     <Content Include="Themes\Tech\Masterpage\Masterpage.cshtml" />
-    <Content Include="Themes\Tech\Partials\_Header.cshtml" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
+    <Content Include="Themes\Default\Partials\_HeaderStatic.cshtml" />
+    <Content Include="Themes\Tech\Partials\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -376,6 +379,22 @@
     <ProjectReference Include="..\Writa.MongoDb\Writa.Data.MongoDb.csproj">
       <Project>{ab77e425-e0cb-4c35-aeee-fa07ac9e9f12}</Project>
       <Name>Writa.Data.MongoDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writa.Plugins.Archives\Writa.Plugins.Archives.csproj">
+      <Project>{131b2c08-aff0-461a-b36d-800b9e32276b}</Project>
+      <Name>Writa.Plugins.Archives</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writa.Plugins.Disqus\Writa.Plugins.Disqus.csproj">
+      <Project>{bffab2c0-4a22-46b7-b58d-d72a42349a7b}</Project>
+      <Name>Writa.Plugins.Disqus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writa.Plugins.GoogleAnalytics\Writa.Plugins.GoogleAnalytics.csproj">
+      <Project>{96d61677-8115-4936-85f2-936b8ffe538f}</Project>
+      <Name>Writa.Plugins.GoogleAnalytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Writa.Plugins.Navbar\Writa.Plugins.Navbar.csproj">
+      <Project>{c35f785d-b901-4d75-a120-defd3a414526}</Project>
+      <Name>Writa.Plugins.Navbar</Name>
     </ProjectReference>
     <ProjectReference Include="..\Writa.Plugins\Writa.Plugins.LatestPosts.csproj">
       <Project>{d46c2856-3215-40c9-9198-f1088082b853}</Project>
@@ -411,7 +430,6 @@
     <Content Include="Views\Admin\Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Themes\Dark\Templates\" />
     <Folder Include="Themes\Tech\Templates\" />
     <Folder Include="Themes\Writa\Templates\" />

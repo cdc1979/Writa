@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    var baseurl = $("#baseurl").val();
     $('.selectpicker').selectpicker();
     var validatetemplate = {
         highlight: function (element) {
@@ -31,7 +32,7 @@
             var formdata = $("#settingsform").serialize();
 
             $.ajax({
-                url: "/api/settings/save",
+                url: baseurl+"api/settings/save",
                 type: "POST",
                 data: formdata,
                 success: function (msg) {

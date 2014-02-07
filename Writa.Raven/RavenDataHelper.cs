@@ -59,6 +59,7 @@ namespace Writa.Data
                         //install.
                     }
                     session.SaveChanges();
+                    System.Threading.Thread.Sleep(3000);
                 }
                 return true;
             }
@@ -66,7 +67,7 @@ namespace Writa.Data
             {
                 return false;
             }
-            System.Threading.Thread.Sleep(3000);
+            
             
         }
 

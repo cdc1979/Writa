@@ -1,19 +1,18 @@
 ﻿@using Writa.Models
-
-
 @inherits Writa.Frontend.Models.WritaViewPage
 
     @{
-        //WritaPluginSetting p = datahelper.GetPluginSettings("Latest Posts", "Number To Display", "2");
-        //int numbr = int.Parse(p.Value);
+        var taggedPosts = datahelper.GetPosts().AsQueryable().ToList().SelectMany(w => w.PostTags).GroupBy(t => t).Select(t => new { Tag = t.First(), Count = t.Count() }).ToList();
     }
+@if (taggedPosts.Count() > 0) {
     <div class="panel panel-default">
       <!-- Default panel contents -->
       <div class="panel-heading">Tags</div>
         <div class="panel-body">
-    @foreach (var f in datahelper.GetPosts().AsQueryable().ToList().SelectMany(w => w.PostTags).GroupBy(t => t).Select(t => new { Tag = t.First(), Count = t.Count() }).ToList())
+    @foreach (var f in taggedPosts)
     {
-        <div><a href="/tag/@Server.UrlEncode(f.Tag)">@f.Tag</a></div>
+        <div><a href="~/tag/@Server.UrlEncode(f.Tag)">@f.Tag</a></div>
     }
             </div>
     </div>
+}

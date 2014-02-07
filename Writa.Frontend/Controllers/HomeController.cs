@@ -82,7 +82,7 @@ namespace Writa.Frontend.Controllers
             }
             else
             {
-                return View("Index", "Masterpage", p);
+                return View("TagView", "Masterpage", p);
             }
         }
 

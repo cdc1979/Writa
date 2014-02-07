@@ -1,11 +1,12 @@
 ﻿Dropzone.autoDiscover = false;
 
 $(document).ready(function () {
+    var baseurl = $("#baseurl").val();
     $("#poststartdate").datepicker({ format: 'mm/dd/yyyy' });
     var opts = {
         container: 'epiceditor',
         textarea: null,
-        basePath: '/scripts/EpicEditor-v0.2.2/',
+        basePath: baseurl + 'scripts/EpicEditor-v0.2.2/',
         clientSideStorage: true,
         localStorageName: 'epiceditor',
         useNativeFullscreen: true,
@@ -49,7 +50,7 @@ $(document).ready(function () {
     var postid = $("#postid").val();
     if (postid.length > 5) {
         $.ajax({
-            url: "/writa/getmarkdown",
+            url: baseurl+"writa/getmarkdown",
             type: "POST",
             data: { postid: postid },
             success: function (msg) {
@@ -61,7 +62,7 @@ $(document).ready(function () {
     
     $("#dz").dropzone(
         {
-            url: "/writa/uploadimage",
+            url: baseurl+"writa/uploadimage",
             paramName: "file",
             uploadMultiple: true,
             maxFilesize: 10,
@@ -97,7 +98,7 @@ $(document).ready(function () {
            toastr.error("Please enter at least 5 characters for your post title");
        }
        else {
-           $.post('/writa/createpost', { PostTitle: title, PostMarkdown: markdown, poststartdate: poststartdate }, function (data) {
+           $.post(baseurl+'writa/createpost', { PostTitle: title, PostMarkdown: markdown, poststartdate: poststartdate }, function (data) {
                //alert(data);
                if (data == "Success") {
                    editor.remove("addpost");
@@ -118,7 +119,7 @@ $(document).ready(function () {
     $(".imagebrowser").click(function (e) {
 
         $.ajax({
-            url: "/writa/selectimage",
+            url: baseurl + "writa/selectimage",
             type: "GET",
             cache: false,
             //contentType: 'application/json',

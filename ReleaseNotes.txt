@@ -8,6 +8,9 @@ Changes/Fixes
 - Added "Tag is required" validation when tagging a post
 - Added validation to the blog settings page, and validated the page route that is entered
 - Switched some of the modal alerts to BootBoxjs for ease of use and readability
+- Fixed some issues with the root URLs when runnign the blog in a subfolder
+- Fixed a bug in the archive post page
+- Added Canonical link into headers
 
 Features
 
@@ -16,6 +19,7 @@ Features
 - Added a stats helper function within each data provider
 - Added a new redirection function, you can now redirect any post or page to another url
 - Can now sort and adjust the number of items shown in the admin editor
+- Added SMTP email function
 
 External Libraries
 

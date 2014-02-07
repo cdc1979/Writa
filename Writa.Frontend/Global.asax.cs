@@ -58,7 +58,7 @@ namespace Writa.Frontend
             {
                 builder.RegisterInstance(new EfDataHelper(GlobalSettings)).As<IDataHelper, IBlogSettingsLoader>();
             }
-            else if (GlobalSettings.BlogDb == DbType.RAVEN_EMBEDDED)
+            else if (GlobalSettings.BlogDb == DbType.RAVENDB)
             {
                 builder.RegisterInstance(new RavenDataHelper(GlobalSettings, HttpContext.Current.Server.MapPath(GlobalSettings.LocalDbPath))).As<IDataHelper, IBlogSettingsLoader>().SingleInstance();
             }

@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-
+    var baseurl = $("#baseurl").val();
     $("#dz").dropzone(
         {
-            url: "/writa/uploadimage",
+            url: baseurl+"writa/uploadimage",
             paramName: "file",
             uploadMultiple: true,
             maxFilesize: 10,

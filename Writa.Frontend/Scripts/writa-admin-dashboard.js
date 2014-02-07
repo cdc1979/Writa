@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-
+    var baseurl = $("#baseurl").val();
     $("#sitemapbutton").click(function (e) {
         $.ajax({
-            url: "/api/tasks/sitemap",
+            url: baseurl+"api/tasks/sitemap",
             type: "POST",
             success: function (msg) {
                 toastr.success("Sitemap has been updated!");
@@ -15,7 +15,7 @@
         var btn = $(this);
         btn.button('loading');
         $.ajax({
-            url: "/api/tasks/showcase",
+            url: baseurl + "api/tasks/showcase",
             type: "POST",
             success: function (msg) {
                 btn.button('reset');
@@ -36,7 +36,7 @@
         var obj = { filename: filename };
         if (confirm('Are you sure? This will overwrite all existing posts.')) {
             $.ajax({
-                url: "/api/tasks/restore",
+                url: baseurl + "api/tasks/restore",
                 type: "POST",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
@@ -54,7 +54,7 @@
         var btn = $(this);
         btn.button('loading');
         $.ajax({
-            url: "/writa/restoredb",
+            url: baseurl + "writa/restoredb",
             type: "POST",
             success: function (msg) {
 
@@ -71,7 +71,7 @@
     $("#backupbutton").click(function (e) {
 
         $.ajax({
-            url: "/api/tasks/backup",
+            url: baseurl + "api/tasks/backup",
             type: "POST",
             success: function (msg) {
                 toastr.success("Backup has been created (Check App_Data Folder)");

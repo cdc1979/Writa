@@ -8,10 +8,13 @@
 }
 
 $(document).ready(function () {
+
+    var baseurl = $("#baseurl").val();
+
     var opts = {
         container: 'epiceditor',
         textarea: null,
-        basePath: '/scripts/EpicEditor-v0.2.2/',
+        basePath: baseurl+'scripts/EpicEditor-v0.2.2/',
         clientSideStorage: true,
         localStorageName: 'epiceditor',
         useNativeFullscreen: true,
@@ -23,8 +26,8 @@ $(document).ready(function () {
         },
         theme: {
             base: 'themes/base/epiceditor.css',
-            preview: 'themes/preview/preview-dark.css',
-            editor: 'themes/editor/epic-dark.css'
+            preview:  'themes/preview/preview-dark.css',
+            editor:  'themes/editor/epic-dark.css'
         },
         button: {
             preview: true,
@@ -67,7 +70,7 @@ $(document).ready(function () {
     var editor = new EpicEditor(opts).load(function () { /*alert("loaded!");*/ });
 
     var dataService = new breeze.DataService({
-        serviceName: "/breeze/breeze",
+        serviceName: baseurl + "breeze/breeze",
         hasServerMetadata: false // don't ask the server for metadata
     });
 
@@ -141,7 +144,7 @@ $(document).ready(function () {
         var btn = $(this);
         btn.button('loading');
         $.ajax({
-            url: "/writa/editsettings/"+$(this).attr("postid"),
+            url: baseurl + "writa/editsettings/" + $(this).attr("postid"),
             type: "GET",
             cache: false,
             //contentType: 'application/json',
@@ -177,7 +180,7 @@ $(document).ready(function () {
         var post = editor.exportFile("epiceditor", "text");
         //alert(postid);
         $.ajax({
-            url: "/api/posts/update",
+            url: baseurl + "api/posts/update",
             type: "POST",
             //contentType: 'application/json',
             data: { postid: postid, postmarkdown: post, posttitle: title },
@@ -196,7 +199,7 @@ $(document).ready(function () {
             //alert(postid);
             var obj = { postid: postid };
             $.ajax({
-                url: "/api/posts/deletepost",
+                url: baseurl + "api/posts/deletepost",
                 type: "POST",
                 contentType: 'application/json',
                 data: JSON.stringify(obj),
@@ -221,7 +224,7 @@ $(document).ready(function () {
                 var btn = $(this);
                 btn.button('loading');
                 $.ajax({
-                    url: "/api/posts/updatesettings",
+                    url: baseurl + "api/posts/updatesettings",
                     type: "POST",
                     //contentType: 'application/json',
                     data: formdata,
@@ -245,7 +248,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#selectimagebutton", function (e) {
         $.ajax({
-            url: "/writa/selectimage?classname=thumbnailclick",
+            url: baseurl + "writa/selectimage?classname=thumbnailclick",
             type: "GET",
             cache: false,
             //contentType: 'application/json',
@@ -266,7 +269,7 @@ $(document).ready(function () {
     $(".imagebrowser").click(function (e) {
 
         $.ajax({
-            url: "/writa/selectimage?classname=imageclick",
+            url: baseurl + "writa/selectimage?classname=imageclick",
             type: "GET",
             cache: false,
             //contentType: 'application/json',
@@ -292,7 +295,7 @@ $(document).ready(function () {
         var tagval = $("#addtag").val();
         if (tagval.length > 1) {
             $.ajax({
-                url: "/api/posts/tag",
+                url: baseurl + "api/posts/tag",
                 type: "POST",
                 data: { postid: $(this).attr("postid"), tag: tagval, "delete": false },
                 success: function (msg) {
@@ -316,7 +319,7 @@ $(document).ready(function () {
     $(document).on("click",".deletetag",function () {
         var txt = $(this).text();
         $.ajax({
-            url: "/api/posts/tag",
+            url: baseurl + "api/posts/tag",
             type: "POST",
             data: { postid: $("#postid").val(), tag: $(this).text(), "delete": true },
             success: function (msg) {

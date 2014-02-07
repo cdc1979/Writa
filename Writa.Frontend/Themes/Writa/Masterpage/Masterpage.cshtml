@@ -1,16 +1,15 @@
-﻿@model Writa.Models.WritaPage
+﻿@using Writa.Models
+@model Writa.Models.WritaPage
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width" />
 <meta name="description" content="@Model.PageDescription" />
-<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 @Html.Partial("_Header", Model)
-<link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.rss">
 <title>@Model.PageTitle</title>
 </head>
 <body>
-    <header style="height: 170px; background-color: #222; color: #fff; padding: 30px; text-align: left; background-image:url('/themes/writa/header.jpg?mode=crop&width=2000');">
+    <header style="height: 170px; background-color: #222; color: #fff; padding: 30px; text-align: left;">
         <h1 style="font-size: 2.2em;font-family: 'Oswald', cursive;">@Model.BlogSettings.BlogTitle</h1>
         <p>@Model.BlogSettings.BlogSummary</p>
     </header>

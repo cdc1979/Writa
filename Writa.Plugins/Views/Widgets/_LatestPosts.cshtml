@@ -16,7 +16,7 @@
       <ul class="list-group">
     @foreach (var f in datahelper.GetPosts().AsQueryable().Where(w => w.PostType == WritaPostType.BLOGPOST).OrderByDescending(w=>w.PostCreated).Take(numbr))
     {
-        <li class="list-group-item"><a href="/@f.PostSlug">@f.PostTitle</a></li>
+        <li class="list-group-item"><a href="~/@f.PostSlug">@f.PostTitle</a></li>
     }
       </ul>
     </div>  
