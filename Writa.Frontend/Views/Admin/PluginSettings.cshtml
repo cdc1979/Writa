@@ -12,13 +12,13 @@
     <script src="~/Scripts/bootstrap-select.min.js"></script>
     <script>
         $(document).ready(function () {
-
+            var baseurl = $("#baseurl").val();
             $(".selectpicker").selectpicker();
 
             $(".deletepluginsetting").click(function (e) {
                 var sid = $(this).attr("sid");
                 $.ajax({
-                    url: "/api/plugins/deletekey",
+                    url: baseurl+"/api/plugins/deletekey",
                     type: "GET",
                     //contentType: 'application/json',
                     data: { sid: sid },
@@ -36,7 +36,7 @@
                 var val = $(this).parent().parent().find(".val").val();
 
                 $.ajax({
-                    url: "/api/plugins/updatekey",
+                    url: baseurl + "api/plugins/updatekey",
                     type: "GET",
                     //contentType: 'application/json',
                     data: { sid: sid, newvalue: val },

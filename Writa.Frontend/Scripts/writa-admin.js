@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+    var baseurl = $("#baseurl").val();
     var validatetemplate = {
         highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error');
