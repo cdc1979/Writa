@@ -1,0 +1,54 @@
+﻿@using Writa.Models
+@model WritaUser
+<form class="form-horizontal" id="edituserform" role="form">
+  <div class="form-group">
+    <label for="username" class="col-sm-3 control-label">User Name</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control required" id="username" name="UserFullName" placeholder="User Name" value="@Model.UserFullName" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="username" class="col-sm-3 control-label">Email Address</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control required email" id="EmailAddress" name="EmailAddress" placeholder="Email Address" value="@Model.EmailAddress" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="UserType" class="col-sm-3 control-label">User Level</label>
+    <div class="col-sm-9">
+          <select class="selectpicker" name="UserType">
+          @{
+              var g = Enum.GetValues(typeof(AccountType)).Cast<AccountType>().ToList();
+          }
+          @foreach (var h in g)
+          {
+              if (Model.UserType == h)
+              {
+                  <option selected="selected">@h.ToString()</option>
+              }
+              else {
+              <option>@h.ToString()</option>
+            }
+          }
+      </select>
+
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="username" class="col-sm-3 control-label">Date Registered</label>
+    <div class="col-sm-9">
+      @Model.DateRegistered
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="username" class="col-sm-3 control-label">Date Registered</label>
+    <div class="col-sm-9">
+      @Model.DateLastLogin
+    </div>
+  </div>
+  <input type="hidden" name="Id" value="@Model.Id" />
+
+</form>

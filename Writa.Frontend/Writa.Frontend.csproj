@@ -64,6 +64,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Breeze.Server.WebApi2.1.4.8\lib\Breeze.WebApi2.dll</HintPath>
     </Reference>
+    <Reference Include="Devnuggets.Toolkit">
+      <HintPath>..\packages\Devnuggets.Toolkit.1.1.0.0\lib\net45\Devnuggets.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Devnuggets.Toolkit.Data">
+      <HintPath>..\packages\Devnuggets.Toolkit.1.1.0.0\lib\net45\Devnuggets.Toolkit.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Devnuggets.Toolkit.MongoDb">
+      <HintPath>..\packages\Devnuggets.Toolkit.1.1.0.0\lib\net45\Devnuggets.Toolkit.MongoDb.dll</HintPath>
+    </Reference>
+    <Reference Include="Devnuggets.Toolkit.Mvc">
+      <HintPath>..\packages\Devnuggets.Toolkit.1.1.0.0\lib\net45\Devnuggets.Toolkit.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EmbeddedResourceVirtualPathProvider, Version=1.0.5119.24011, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EmbeddedResourceVirtualPathProvider.1.2.21\lib\net40\EmbeddedResourceVirtualPathProvider.dll</HintPath>
@@ -91,6 +103,17 @@
     </Reference>
     <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=1.8.3.9, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.8.3.9, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="mysql.data">
+      <HintPath>..\packages\MySql.Data.6.4.4\lib\net40\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -192,6 +215,7 @@
     <Compile Include="Controllers\api\SettingsController.cs" />
     <Compile Include="Controllers\api\TasksController.cs" />
     <Compile Include="Controllers\api\BreezeController.cs" />
+    <Compile Include="Controllers\api\UserAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\WritaController.cs" />
@@ -200,6 +224,7 @@
     </Compile>
     <Compile Include="Models\CanonicalHelper.cs" />
     <Compile Include="Models\RebuildRoutes.cs" />
+    <Compile Include="Models\UserManageViewModel.cs" />
     <Compile Include="Models\WritaViewEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -214,6 +239,7 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\Writa.css" />
+    <Content Include="Deploy.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\readme.txt" />
     <Content Include="LICENSE.txt" />
@@ -226,6 +252,7 @@
     <None Include="Scripts\breeze.intellisense.js" />
     <Content Include="Scripts\breeze.debug.js" />
     <Content Include="Scripts\breeze.min.js" />
+    <Content Include="Scripts\writa-admin-usermanager.js" />
     <Content Include="Scripts\datepicker\css\datepicker.css" />
     <Content Include="Scripts\datepicker\js\bootstrap-datepicker.js" />
     <Content Include="Scripts\dropzone\css\basic.css" />
@@ -270,6 +297,11 @@
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\moment-with-langs.js" />
     <Content Include="Scripts\moment-with-langs.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -310,6 +342,7 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\writa-admin-editor.js" />
     <Content Include="Scripts\writa-admin.js" />
+    <Content Include="Scripts\writa-register.js" />
     <Content Include="Themes\Dark\Content\Default.css" />
     <Content Include="Themes\Default\Content\Default.css" />
     <Content Include="Themes\Tech\Content\Default.css" />
@@ -347,6 +380,10 @@
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <Content Include="Themes\Default\Partials\_HeaderStatic.cshtml" />
     <Content Include="Themes\Tech\Partials\_Header.cshtml" />
+    <Content Include="Views\Admin\UserManager.cshtml" />
+    <Content Include="Views\Admin\_AddUser.cshtml" />
+    <Content Include="Views\Admin\_EditUser.cshtml" />
+    <Content Include="Views\Admin\_ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -434,6 +471,7 @@
     <Folder Include="Themes\Dark\Templates\" />
     <Folder Include="Themes\Tech\Templates\" />
     <Folder Include="Themes\Writa\Templates\" />
+    <Folder Include="Views\Writa\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

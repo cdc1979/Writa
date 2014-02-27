@@ -83,9 +83,13 @@ namespace Writa.Frontend.Controllers
             WritaPost checkexists = _dbhelper.GetPostFromSlug(PostTitle.Replace(" ", "-").ToLower());
             if (checkexists == null)
             {
+                WritaUser u = _dbhelper.GetUserById(new WritaUser() { Id = User.Identity.Name});
 
                 WritaPost post = new WritaPost();
-                post.PostAuthor = User.Identity.Name;
+                post.PostAuthorID = User.Identity.Name;
+                post.PostAuthor = u.UserFullName;
+                post.PostLastEditedAuthor = u.UserFullName;
+                post.PostLastEditedAuthorID = User.Identity.Name;
                 post.Homepage = false;
                 post.PostSlug = PostTitle.Replace(" ", "-").ToLower();
                 post.PostTitle = PostTitle;
@@ -95,6 +99,7 @@ namespace Writa.Frontend.Controllers
                 post.PostThumbnail = "/content/logo.jpg";
                 post.PostCreated = DateTime.Now;
                 post.PostLastEdited = DateTime.Now;
+
                 DateTime dateValue;
                 if (DateTime.TryParse(poststartdate, out dateValue))
                 {
@@ -196,7 +201,7 @@ namespace Writa.Frontend.Controllers
             {
 
                 subscribe = true;
-
+                // this subscribes the new user to the write newsletter by pinging the writa.org API.
                 try
                 {
                     var client = new RestClient("http://writa.org");
@@ -224,6 +229,15 @@ namespace Writa.Frontend.Controllers
                     };
 
                     WritaUser u = _dbhelper.CreateUser(newUser);
+
+                    foreach (WritaPost w in _dbhelper.GetAllPosts())
+                    {
+                        w.PostAuthorID = u.Id;
+                        w.PostLastEditedAuthorID = u.Id;
+                        w.PostLastEditedAuthor = u.UserFullName;
+                        w.PostAuthor = u.UserFullName;
+                        _dbhelper.UpdatePost(w);
+                    }
 
                     //send registration email?
                     //var fullurl = this.Url.Action("ValidateAccount", "Account", null, this.Request.Url.Scheme);
@@ -279,6 +293,16 @@ namespace Writa.Frontend.Controllers
             
             w._db = _dbhelper;
             return PartialView("~/Views/Admin/_UpdatePostSettings.cshtml", w);
+        }
+
+        [Authorize]
+        public ActionResult UserManager()
+        {
+            UserManagerViewModel m = new UserManagerViewModel();
+            m.users = _dbhelper.GetUsers().ToList();
+            m.currentuser = _dbhelper.GetUserById(new WritaUser() { Id = User.Identity.Name });
+            m.posts = _dbhelper.GetAllPosts().ToList();
+            return View("~/Views/Admin/UserManager.cshtml", "~/Views/Admin/_Adminlayout.cshtml", m);
         }
 
         [Authorize]
@@ -405,6 +429,37 @@ namespace Writa.Frontend.Controllers
             while (0 < length--)
                 res += valid[rnd.Next(valid.Length)];
             return res;
+        }
+
+        [Authorize]
+        [HttpPost]
+        public PartialViewResult AddUser()
+        {
+            return PartialView("~/Views/Admin/_AddUser.cshtml", new WritaUser() { });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public PartialViewResult EditUser(string userid)
+        {
+            var user = _dbhelper.GetUserById(new WritaUser() { Id = userid });
+            if (user == null)
+            {
+                Response.Write("null");
+            }
+            return PartialView("~/Views/Admin/_EditUser.cshtml", user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public PartialViewResult ChangePassword(string userid)
+        {
+            var user = _dbhelper.GetUserById(new WritaUser() { Id = userid });
+            if (user == null)
+            {
+                Response.Write("null");
+            }
+            return PartialView("~/Views/Admin/_ChangePassword.cshtml", user);
         }
 
     }

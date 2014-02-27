@@ -1,0 +1,52 @@
+﻿@using Writa.Models
+@using Writa.Frontend.Models
+@using Devnuggets.Toolkit.Mvc
+@model UserManagerViewModel
+@{
+    ViewBag.Title = "UserManager";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    
+}
+@section PageJavaScript
+{
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    <script src="~/Scripts/writa-admin-usermanager.js"></script>
+}
+<div class="container">
+<h4>User Manager @if (Model.currentuser.UserType == AccountType.ADMINISTRATOR) { <button class="btn btn-success btn-xs" id="adduserbutton">Add New User</button> }</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>Username</th>
+            <th>Email</th>
+            <th>Last Login</th>
+            <th>Pages Created</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (WritaUser w in Model.users)
+{
+    <tr>
+        
+        <td>@w.UserFullName</td>
+        <td>@w.EmailAddress</td>
+        <td>@w.DateLastLogin</td>
+        <td>@Model.posts.Where(u=>u.PostAuthorID == w.Id).Count()</td>
+        @if (Model.currentuser.UserType == AccountType.ADMINISTRATOR) {
+        <td><button class="btn btn-xs btn-warning changepasswordbutton" userid="@w.Id">Change Password</button></td>
+        }
+        else {
+         <td></td>   
+        }
+        <td><button class="btn btn-xs btn-danger edituserbutton" userid="@w.Id">Edit</button></td>
+    </tr>
+}
+        </tbody>
+</table>
+</div>

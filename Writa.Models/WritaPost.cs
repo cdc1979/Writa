@@ -18,7 +18,10 @@ namespace Writa.Models
         public bool Homepage { get; set; }
         public DateTime PostCreated { get; set; }
         public string PostAuthor { get; set; }
+        public string PostAuthorID { get; set; }
         public DateTime PostLastEdited { get; set; }
+        public string PostLastEditedAuthor { get; set; }
+        public string PostLastEditedAuthorID { get; set; }
         public DateTime PostStartDate { get; set; } // schedule post to start on
         public WritaPostStatus PostStatus { get; set; }
         public WritaPostType PostType { get; set; }

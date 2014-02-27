@@ -5,7 +5,9 @@
 
 @section PageJavaScript
 {
+    <script src="~/Scripts/bootbox.min.js"></script>
     <script type="text/javascript"src="@Url.Content("~/Scripts/writa-admin.js")"></script>
+    <script type="text/javascript"src="@Url.Content("~/Scripts/writa-register.js")"></script>
 }
 
 <div class="container" style="padding-top: 15em;">
@@ -34,7 +36,7 @@
                     </div>
                 </div>  
                  <div class="form-group">
-                    <label for="inputEmail1" class="col-lg-4 control-label">Email me about new features and content <small><a href="~/Home/Privacy">Privacy policy</a></small></label>
+                    <label for="inputEmail1" class="col-lg-4 control-label">Email me about new features and content <small><a href="#" id="privacymsg">Privacy policy</a></small></label>
                     <div class="col-lg-2">
                         <input type="checkbox" checked="checked" name="subscribetonews" id="subscribetonews" class="form-control" />
                     </div>

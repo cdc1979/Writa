@@ -123,6 +123,8 @@ namespace Writa.Data
                 pl.PostStatus = p.PostStatus;
                 pl.PostSummary = p.PostSummary;
                 pl.PostTags = p.PostTags;
+                pl.PostAuthor = p.PostAuthor;
+                pl.PostLastEditedAuthor = p.PostLastEditedAuthor;
                 pl.PostThumbnail = p.PostThumbnail;
                 pl.PostTitle = p.PostTitle;
                 pl.PostType = p.PostType;
@@ -199,8 +201,11 @@ namespace Writa.Data
         {
             using (var session = docStore.OpenSession())
             {
-                WritaUser ux = session.Load<WritaUser>("writausers/" + u.Id);
+                WritaUser ux = session.Load<WritaUser>(u.Id);
                 ux.UserPasswordEncrypted = u.UserPasswordEncrypted;
+                if (u.EmailAddress != ux.EmailAddress) { ux.EmailAddress = u.EmailAddress; }
+                if (u.UserFullName != ux.UserFullName) { ux.UserFullName = u.UserFullName; }
+                if (u.UserType != ux.UserType) { ux.UserType = u.UserType; }
                 session.SaveChanges();
                 return ux;
             }
@@ -223,7 +228,8 @@ namespace Writa.Data
         {
             using (var session = docStore.OpenSession())
             {
-                return session.Query<WritaUser>().AsQueryable().Where(w => w.Id == u.Id).SingleOrDefault();
+                WritaUser ux = session.Load<WritaUser>(u.Id);
+                return ux;
             }
         }
 
@@ -231,12 +237,9 @@ namespace Writa.Data
         {
             using (var session = docStore.OpenSession())
             {
-                return session.Query<WritaUser>().AsQueryable();
+                return session.Query<WritaUser>().Customize(x => x.WaitForNonStaleResultsAsOfNow()).AsQueryable();
             }
-            
         }
-
-
 
         public WritaSettings LoadSettings()
         {

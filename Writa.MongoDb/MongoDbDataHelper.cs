@@ -116,7 +116,12 @@ namespace Writa.Data
 
         public WritaUser UpdateUser(WritaUser u)
         {
-            database.GetCollection<WritaUser>("Users").Save(u);
+            var ux = database.GetCollection<WritaUser>("Users").AsQueryable().Where(w => w.Id == u.Id).SingleOrDefault();
+            ux.UserPasswordEncrypted = u.UserPasswordEncrypted;
+            if (u.EmailAddress != ux.EmailAddress) { ux.EmailAddress = u.EmailAddress; }
+            if (u.UserFullName != ux.UserFullName) { ux.UserFullName = u.UserFullName; }
+            if (u.UserType != ux.UserType) { ux.UserType = u.UserType; }
+            database.GetCollection<WritaUser>("Users").Save(ux);
             return u;
         }
 

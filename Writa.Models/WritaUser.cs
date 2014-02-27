@@ -17,6 +17,8 @@ namespace Writa.Models
         public string EmailAddress { get; set; }
         public AccountType UserType { get; set; }
         public bool UserVerified { get; set; }
+        public bool CanAddPosts { get; set; }
+        public bool CanEditPosts { get; set; }
     }
 
     public enum AccountType { ADMINISTRATOR, USER }

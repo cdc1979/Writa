@@ -1,3 +1,17 @@
+Version 0.3.0
+
+Changes/Fixes
+
+Features
+
+- Added User Management page
+
+External Libraries
+
+- Updated JSON.NET
+- Updated Microsoft Azure Library
+- Updated MongoDB Driver
+
 Version 0.2.0
 
 Changes/Fixes

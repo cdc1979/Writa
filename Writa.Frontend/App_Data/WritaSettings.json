@@ -1,0 +1,13 @@
+﻿{
+"BlogDb":"RAVENDB",
+"DbConnectionString":"",
+"DbName":"Writa",
+"LocalDbPath":"~/App_Data/BlogData",
+"BlogEmailMethod":"SMTP",
+"EmailServer":"",
+"EmailUseSSL":"false",
+"EmailFromAddress":"",
+"EmailRequireAuth":"false",
+"EmailUsername":"",
+"EmailPassword":""
+}

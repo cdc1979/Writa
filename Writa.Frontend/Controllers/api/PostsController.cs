@@ -74,8 +74,11 @@ namespace Writa.Frontend.Controllers.api
         [Authorize]
         public string Update(PostUpdate u)
         {
+            WritaUser user = _dbhelper.GetUserById(new WritaUser() { Id = User.Identity.Name });
             var post = _dbhelper.GetPostFromId(u.postid);
             post.PostTitle = u.posttitle;
+            post.PostLastEditedAuthor = user.UserFullName;
+            post.PostLastEditedAuthorID = User.Identity.Name;
             post.PostContent = u.postmarkdown;
             _dbhelper.UpdatePost(post);
             return u.posttitle;
@@ -138,6 +141,7 @@ namespace Writa.Frontend.Controllers.api
 
             if (results.IsValid)
             {
+                WritaUser user = _dbhelper.GetUserById(new WritaUser() { Id = User.Identity.Name });
                 WritaPost x = _dbhelper.GetPostFromId(u.PostId);
                 x.PostSlug = StringTools.ReplaceBadInUrl(u.PostSlug);
                 x.PostTitle = u.PostTitle;
@@ -148,6 +152,9 @@ namespace Writa.Frontend.Controllers.api
                 x.PostSummary = u.PostSummary;
                 x.PostThumbnail = u.PostThumbnail;
                 x.PostParent = u.PostParent;
+                x.PostLastEditedAuthorID = User.Identity.Name;
+                x.PostLastEditedAuthor = user.UserFullName;
+
                 _dbhelper.UpdatePost(x);
                 RebuildRoutes.Rebuild(true, _dbhelper);
                 return "Success - post updated";
