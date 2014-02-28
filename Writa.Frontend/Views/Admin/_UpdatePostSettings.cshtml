@@ -28,6 +28,23 @@
       <input type="text" class="form-control" id="PostRedirect" name="PostRedirect" placeholder="Redirect This Page To Another URL?" value="@Model.post.PostRedirect" />
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="FeaturedPost" class="col-sm-2 control-label">Featured Post?</label>
+    <div class="col-sm-10">
+        <select class="selectpicker" name="Featured">
+      @if (Model.post.Featured) {
+          <option selected="selected">True</option>
+          <option>False</option>
+      }
+        else {
+          <option>True</option>
+          <option selected="selected">False</option>
+      }
+            </select>
+        
+    </div>
+  </div>
     
   <div class="form-group">
     <label for="PostSlug" class="col-sm-2 control-label">Post Summary</label>
@@ -47,7 +64,7 @@
   </div>
   <div class="form-group">
     <label for="PostStatus" class="col-sm-2 control-label">Post Status</label>
-    <div class="col-sm-10">
+    <div class="col-sm-4">
       <select class="selectpicker" name="PostStatus">
           @{
               var g = Enum.GetValues(typeof(WritaPostStatus)).Cast<WritaPostStatus>().ToList();

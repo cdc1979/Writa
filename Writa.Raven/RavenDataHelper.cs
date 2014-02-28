@@ -129,6 +129,7 @@ namespace Writa.Data
                 pl.PostTitle = p.PostTitle;
                 pl.PostType = p.PostType;
                 pl.PostParent = p.PostParent;
+                pl.Featured = p.Featured;
                 if (p.PostCreated != pl.PostCreated)
                 {
                     pl.PostCreated = p.PostCreated;

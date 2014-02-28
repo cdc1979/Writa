@@ -220,7 +220,7 @@ $(document).ready(function () {
             } else {
 
                 var formdata = $("#settingsform").serialize();
-                //alert(formdata);
+                alert(formdata);
                 var btn = $(this);
                 btn.button('loading');
                 $.ajax({

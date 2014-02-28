@@ -154,6 +154,7 @@ namespace Writa.Frontend.Controllers.api
                 x.PostParent = u.PostParent;
                 x.PostLastEditedAuthorID = User.Identity.Name;
                 x.PostLastEditedAuthor = user.UserFullName;
+                x.Featured = u.Featured;
 
                 _dbhelper.UpdatePost(x);
                 RebuildRoutes.Rebuild(true, _dbhelper);

@@ -4,7 +4,8 @@ Changes/Fixes
 
 Features
 
-- Added User Management page
+- Added User Management page, ability to add and edit users
+- Added "Featured Post" option
 
 External Libraries
 

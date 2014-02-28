@@ -78,6 +78,7 @@ namespace Writa.Frontend.Controllers
         // POST api/<controller>
         [HttpPost]
         [Authorize]
+        [ValidateInput(false)]
         public string CreatePost(string PostTitle, string PostMarkdown, string poststartdate)
         {
             WritaPost checkexists = _dbhelper.GetPostFromSlug(PostTitle.Replace(" ", "-").ToLower());

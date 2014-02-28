@@ -27,6 +27,7 @@ namespace Writa.Models
         public WritaPostType PostType { get; set; }
         public string PostParent { get; set; } // allows for a post to have a parent
         public string PostRedirect { get; set; } // redirects this post/page to another url
+        public bool Featured { get; set; }
     }
 
     public enum WritaPostStatus { PUBLISHED, DRAFT, DELETED } // status of this post
